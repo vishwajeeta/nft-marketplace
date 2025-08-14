@@ -1,0 +1,22 @@
+{
+  "name": "nft-marketplace",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@turbo/gen": "^2.5.5",
+    "eslint": "^9.32.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^3.6.2",
+    "tsconfig": "workspace:*",
+    "turbo": "^2.5.5"
+  },
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=18"
+  }
+}
