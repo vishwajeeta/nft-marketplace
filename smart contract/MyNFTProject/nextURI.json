@@ -1,0 +1,9 @@
+{
+  "name": "My First NFT",
+  "description": "This is an amazing NFT from my collection!",
+  "image": "ipfs://bafkreicvtfo7vvxmwskfuhufnxokapc6c2vfx4j72inu35vhjltzgv547q",
+  "attributes": [
+    { "trait_type": "Strength", "value": 10 },
+    { "trait_type": "Speed", "value": 7 }
+  ]
+}
