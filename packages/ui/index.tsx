@@ -3,7 +3,7 @@ import * as React from "react";
 // component exports
 export * from "./components/RootLayout";
 export * from "./components/Button";
-export * from "./components/NFTCard";
+export * from "./components/NftCard";
 export * from "./components/AvatarName";
 export * from "./components/CategoryCard";
 export * from "./components/TextNormalMono";

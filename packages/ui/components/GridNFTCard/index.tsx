@@ -1,6 +1,6 @@
 import { ButtonTheme, NFTCardData } from "../../types";
 import { Button } from "../Button";
-import { NFTCard } from "../NFTCard";
+import { NFTCard } from "../NftCard";
 import { TextNormalSans } from "../TextNormalSans";
 import { TextSemiBoldSans } from "../TextSemiBoldSans";
 import EyeIcon from "../icons/EyeIcon";
