@@ -12,10 +12,13 @@ import {
 import { Logo } from "./Logo";
 import { TextNormalSans } from "./TextNormalSans";
 import { Button } from "./Button";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import BurgerMenuIcon from "./icons/BurgerMenuIcon";
 import { Loading } from "./Loading";
 import DarkLightModeButton from "./DarkLightModeButton";
+
+import contractData from "./IPFSContractABI.json";
+import { BrowserProvider, Contract } from "ethers";
 
 const DynamicMobileMenu = dynamic(() => import("./MobileMenu"), {
   loading: () => <Loading />,
@@ -27,6 +30,29 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollStopped, setScrollStopped] = useState(false);
   const { scrollY } = useScroll();
+
+  const [account, setAccount] = useState<string | null>(null);
+  const [provider, setProvider] = useState<BrowserProvider | null>(null);
+  const [contract, setContract] = useState<Contract | null>(null);
+  const CONTRACT_ADDRESS = contractData.address;
+
+  // Connect wallet
+  const connectWallet = async () : Promise<void> => {
+      if (!window.ethereum) {
+      alert("Install MetaMask first");
+      return;
+    }
+
+    const web3Provider = new BrowserProvider(window.ethereum);
+    const signer = await web3Provider.getSigner();
+    const userAccount = await signer.getAddress();
+    const contractInstance = new Contract(CONTRACT_ADDRESS, contractData.abi, signer);
+
+    setProvider(web3Provider);
+    setAccount(userAccount);
+    setContract(contractInstance);
+  };
+
 
   const ariaLabel = isOpen ? "Close menu" : "Open menu";
 
@@ -47,6 +73,7 @@ export function Header() {
     }
   });
 
+  
   return (
     <motion.header
       className="sticky top-0 z-50 bg-black py-[15px] px-5 lg:px-[50px] lg:py-5"
@@ -75,8 +102,15 @@ export function Header() {
                 </Link>
               </li>
               <li className="custom-animation-scale px-5">
-                <Link href="/">
-                  <TextNormalSans>Connect a wallet</TextNormalSans>
+                <Link href="/minting">
+                  <TextNormalSans>NFT mint & List</TextNormalSans>
+                </Link>
+              </li>
+              <li className="custom-animation-scale px-5">
+                <Link href="/" onClick={connectWallet}>
+                  <TextNormalSans >{account
+        ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}`
+        :`Connect a wallet`}</TextNormalSans>
                 </Link>
               </li>
               <li className="px-5">
