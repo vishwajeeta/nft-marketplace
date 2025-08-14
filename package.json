@@ -15,8 +15,9 @@
     "tsconfig": "workspace:*",
     "turbo": "^2.5.5"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "npm@10.7.0",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "workspaces": ["apps/*", "packages/*"]
 }
