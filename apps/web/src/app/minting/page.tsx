@@ -4,6 +4,7 @@ import { BrowserProvider, Contract } from "ethers";
 import contractData from "./IPFSContractABI.json";
 import NFTList from "./nftList";
 
+
 const CONTRACT_ADDRESS = contractData.address;
 
 export default function Page() {
@@ -104,14 +105,14 @@ const listMyNFTs = async () => {
       <button
         onClick={mintNFT}
         disabled={loading || !tokenURI}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="px-4 py-2 bg-[#A259FF] text-white rounded hover:bg-blue-700 m-4"
       >
         {loading ? "Minting..." : "Mint NFT"}
       </button>
 <button
         onClick={listMyNFTs}
         
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="px-4 py-2 bg-[#A259FF] text-white rounded hover:bg-blue-700 m-4"
       >View My NFTs</button>
       {txHash && (
         <p className="mt-4 text-green-700">
