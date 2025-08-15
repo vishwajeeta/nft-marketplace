@@ -87,6 +87,26 @@ Visit: http://localhost:3000
 
 ## 8. Screenshots
 
+<p align="center">
+  <img src="./images/Screenshot%201.png" alt="Screenshot 1" width="600" style="border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
+
+<p align="center">
+  <img src="./images/Screenshot%202.png" alt="Screenshot 2" width="600" style="border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
+
+<p align="center">
+  <img src="./images/Screenshot%203.png" alt="Screenshot 3" width="600" style="border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
+
+<p align="center">
+  <img src="./images/Screenshot%204.png" alt="Screenshot 4" width="600" style="border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
+
+<p align="center">
+  <img src="./images/Screenshot%205.png" alt="Screenshot 5" width="600" style="border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);" />
+</p>
+
 
 ### **1. Create a Simple NFT Smart Contract**
 
@@ -140,7 +160,3 @@ Visit: http://localhost:3000
 * Need to push final code to a **public GitHub repo**.
 * Add a **README** with:
 
-  * Vishwajeet
-  * ERC721 
-  * Features completed
-  * Instructions to run the app
