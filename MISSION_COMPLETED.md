@@ -108,6 +108,7 @@ Visit: http://localhost:3000
 </p>
 
 
+## Task compleded are:
 ### **1. Create a Simple NFT Smart Contract**
 
 ✅ **Done**
