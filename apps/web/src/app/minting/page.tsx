@@ -1,10 +1,11 @@
+"use client"
 import { useState } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, Contract } from "ethers";
 import contractData from "./IPFSContractABI.json";
 
 const CONTRACT_ADDRESS = contractData.address;
 
-const MintNFTPage: React.FC = () => {
+export default function Page() {
   const [tokenURI, setTokenURI] = useState<string>("");
   const [txHash, setTxHash] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,11 +21,11 @@ const MintNFTPage: React.FC = () => {
 
       // Request account access
       await window.ethereum.request({ method: "eth_requestAccounts" });
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
 
       // Connect to contract
-      const contract = new ethers.Contract(
+      const contract = new Contract(
         CONTRACT_ADDRESS,
         contractData.abi,
         signer
@@ -80,5 +81,3 @@ const MintNFTPage: React.FC = () => {
     </div>
   );
 };
-
-export default MintNFTPage;
