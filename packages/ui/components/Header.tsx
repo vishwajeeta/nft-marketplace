@@ -107,7 +107,7 @@ export function Header() {
                 </Link>
               </li>
               <li className="custom-animation-scale px-5">
-                <Link href="" onClick={connectWallet}>
+                <Link href="#" onClick={connectWallet}>
                   <TextNormalSans >{account
         ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}`
         :`Connect a wallet`}</TextNormalSans>
