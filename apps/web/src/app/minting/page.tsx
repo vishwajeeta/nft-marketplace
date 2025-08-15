@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { BrowserProvider, Contract } from "ethers";
 import contractData from "./IPFSContractABI.json";
+import NFTList from "./nftList";
 
 const CONTRACT_ADDRESS = contractData.address;
 
@@ -9,6 +10,9 @@ export default function Page() {
   const [tokenURI, setTokenURI] = useState<string>("");
   const [txHash, setTxHash] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [myNFTs, setMyNFTs] = useState<{ tokenId: number; uri: string }[]>([]);
+
 
   const mintNFT = async () => {
     if (!window.ethereum) {
@@ -35,9 +39,9 @@ export default function Page() {
 
       // Call mintNFT with user address
       const tx = await contract.mintNFT(await signer.getAddress(), tokenURI);
-      const receipt = await tx.wait();
-
-      setTxHash(receipt.transactionHash);
+      setTxHash(tx.hash);
+      console.log(tx.hash)
+      listMyNFTs();
       alert("NFT minted successfully!");
     } catch (err) {
       console.error(err);
@@ -46,6 +50,46 @@ export default function Page() {
       setLoading(false);
     }
   };
+
+
+
+const listMyNFTs = async () => {
+  if (!window.ethereum) return;
+
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+
+      // Connect to contract
+      const contract = new Contract(
+    CONTRACT_ADDRESS,
+    contractData.abi,
+    signer
+  );
+
+  const myAddress = await signer.getAddress();
+  const totalSupply = 10; // <-- replace with actual total or track off-chain
+
+  const owned: { tokenId: number; uri: string }[] = [];
+
+  for (let i = 0; i < totalSupply; i++) {
+    try {
+      const owner = await contract.ownerOf(i);
+      if (owner.toLowerCase() === myAddress.toLowerCase()) {
+        const uri = await contract.tokenURI(i);
+        owned.push({ tokenId: i, uri });
+        
+      }
+    } catch {
+      // token doesn't exist
+      console.log("no token exist")
+    }
+  }
+
+  console.log("My NFTs:", owned);
+  setMyNFTs(owned); // store in state for display
+
+};
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 border rounded shadow">
@@ -64,7 +108,11 @@ export default function Page() {
       >
         {loading ? "Minting..." : "Mint NFT"}
       </button>
-
+<button
+        onClick={listMyNFTs}
+        
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >View My NFTs</button>
       {txHash && (
         <p className="mt-4 text-green-700">
           Transaction Hash:{" "}
@@ -78,6 +126,8 @@ export default function Page() {
           </a>
         </p>
       )}
+      <NFTList nfts={myNFTs} />
+      
     </div>
   );
 };
